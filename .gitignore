@@ -1,2 +1,6 @@
 venv
 .idea
+/documentation/EncryptionService.aux
+/documentation/EncryptionService.log
+/documentation/EncryptionService.out
+/documentation/EncryptionService.synctex.gz
