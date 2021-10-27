@@ -1,3 +1,5 @@
+from Vigeneretext import VigenereText
+
 # This is a sample Python script.
 
 # Press Umschalt+F10 to execute it or replace it with your code.
@@ -12,5 +14,8 @@ def print_hi(name):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
+    text = VigenereText()
+    text.fill_list("Test")
+    text.encrypt("Ein Schluessel")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
