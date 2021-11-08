@@ -1,3 +1,5 @@
+import string
+
 from Vigeneretext import VigenereText
 
 # This is a sample Python script.
@@ -15,7 +17,8 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
     text = VigenereText()
-    text.fill_list("Test")
-    text.encrypt("Ein Schluessel")
+    text.fill_list("Tes&t")
+    text.encrypt("EinSchluessel")
+    print(text.cipher_character_list)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
