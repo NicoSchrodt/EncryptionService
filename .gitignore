@@ -1,6 +1,11 @@
+.gitignore
 venv
 .idea
-/documentation/EncryptionService.aux
-/documentation/EncryptionService.log
-/documentation/EncryptionService.out
-/documentation/EncryptionService.synctex.gz
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.aux
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.lof
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.log
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.lol
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.lot
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.out
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.synctex.gz
+/documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.toc
