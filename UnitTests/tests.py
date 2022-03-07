@@ -2,10 +2,10 @@ import unittest
 
 from unittest.mock import Mock
 
-import VigenereEncryption
+from Service.Encryption import VigenereEncrypter
 
 
-class TestStringMethods(unittest.TestCase):
+class TestClass(unittest.TestCase):
     '''
     def test_upper(self):
         self.assertEqual('foo'.upper(), 'FOO')

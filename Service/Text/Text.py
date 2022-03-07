@@ -1,4 +1,4 @@
-from EligibleCharacters import EligibleCharacters
+from Service.Text.EligibleCharacters import EligibleCharacters
 
 
 class Text:
@@ -7,7 +7,7 @@ class Text:
         self.cipher_character_list = []
         self.eligible_characters = EligibleCharacters()
 
-    def fill_list(self, characters):
+    def fill_character_list(self, characters):
         temp = characters.upper()
         for i in range(len(temp)):
             self.character_list.append(temp[i])
@@ -16,14 +16,6 @@ class Text:
 
     def output_file(self, path):
         # outputs current character_list in chosen path
-        pass
-
-    def encrypt(self, key):
-        """Encrypt Text and return an encrypted text object"""
-        pass
-
-    def decrypt(self, key):
-        """Decrypt Text and return an decrypted text object"""
         pass
 
     def clear_plaintext(self):
