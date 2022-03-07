@@ -1,8 +1,10 @@
+import string
 import unittest
 
-from unittest.mock import Mock
+from unittest.mock import Mock, create_autospec
 
-from Service.Encryption import VigenereEncrypter
+from Service.Encryption.VigenereEncrypter import VigenereEncrypter
+from Service.Text.Vigeneretext import VigenereText
 
 
 class TestClass(unittest.TestCase):
@@ -21,13 +23,20 @@ class TestClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
     '''
-    def test_vigenere_encryption(self):
-        mock = Mock()
-        mock.character_list = ['a', 'b', 'c', 'd']
-        #test_string = ['a', 'b', 'c', 'd']
-        key = 'aaaa'
+    def test_vigenere_encrypter(self):
+        mock = create_autospec(VigenereText)
+        temp = string.ascii_uppercase
+        character_list = []
+        for i in range(len(temp)):
+            character_list.append(temp[i])
+        mock.get_eligible_characters.return_value = character_list
+        mock.character_list = ['A', 'B', 'C', 'D']
+        mock.cipher_character_list = []
+        key = 'AAAA'
         expected_answer = ['A', 'B', 'C', 'D']
-        answer = VigenereEncryption.encryptVig(mock, key)
+        encrypter = VigenereEncrypter(mock)
+        encrypter.encrypt(key)
+        answer = mock.cipher_character_list
         self.assertEqual(expected_answer, answer)
 
 

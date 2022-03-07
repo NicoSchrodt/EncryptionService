@@ -36,11 +36,11 @@ class VigenereEncrypter(Encrypter):
         key_list = [char for char in key.upper()]
         key_len = len(key_list)
         key_counter = 0
-        index_new = 0
         print(key_list)
         local_list = self.text.character_list
         local_eligible_character_list = self.text.get_eligible_characters()
         num_elg_chars = len(local_eligible_character_list)
+        print(num_elg_chars)
         print(local_eligible_character_list)
         for i in range(len(local_list)):
             try:

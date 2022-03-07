@@ -29,7 +29,7 @@ if __name__ == '__main__':
     text2_enc.encrypt("EinSchluessel")
     print(f'Cipher: {text2.cipher_character_list}')
 
-    # test = TestClass()
-    # test.test_vigenere_encryption()
+    test = TestClass()
+    test.test_vigenere_encrypter()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
