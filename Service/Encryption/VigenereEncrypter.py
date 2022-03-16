@@ -55,8 +55,9 @@ class VigenereEncrypter(Encrypter):
                     key_counter = 0
             except ValueError:  # This means character is not eligible, skip character
                 self.text.cipher_character_list.append(local_list[i])
-                print("Invalid character '" + local_list[i] + "' found, skipped. "
-                                                              "Please add a character-set which contains character.")
+                if local_list[i] != " ":
+                    print("Invalid character '" + local_list[i] + "' found, skipped. "
+                                                                  "Please add a character-set which contains character.")
 
-    def decrypt(self):
+    def decrypt(self, key):
         pass
