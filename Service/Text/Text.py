@@ -14,6 +14,12 @@ class Text:
         # stuff that fills the character_list
         pass
 
+    def get_cipher_string(self):
+        return_string = ""
+        for i in range(len(self.cipher_character_list)):
+            return_string = return_string + self.cipher_character_list[i]
+        return return_string
+
     def output_file(self, path):
         # outputs current character_list in chosen path
         pass
