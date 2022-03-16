@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit"/>
+       <widget class="QPlainTextEdit" name="clear_TE"/>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -61,7 +61,21 @@
        </layout>
       </item>
       <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+       <widget class="QPlainTextEdit" name="cipher_TE"/>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_key">
+        <property name="text">
+         <string>Key:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_key"/>
       </item>
      </layout>
     </item>
@@ -98,7 +112,7 @@
      <x>0</x>
      <y>0</y>
      <width>617</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -123,7 +137,7 @@
   </action>
  </widget>
  <resources>
-  <include location="../Resources/t.qrc"/>
+  <include location="../Resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
