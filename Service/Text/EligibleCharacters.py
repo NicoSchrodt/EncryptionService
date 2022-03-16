@@ -8,13 +8,21 @@ class EligibleCharacters:
     def __init__(self):
         self.character_list = []
 
-    def insert_into_character_list(self, chars):
+    def insert_predefined_into_character_list(self, chars):
         if "std" in chars:
-            temp = string.ascii_uppercase
-            for i in range(len(temp)):
-                self.character_list.append(temp[i])
+            for i in range(len(string.ascii_uppercase)):
+                self.character_list.append(string.ascii_uppercase[i])
+        if "std_low" in chars:
+            for i in range(len(string.ascii_lowercase)):
+                self.character_list.append(string.ascii_lowercase[i])
         if "sc" in chars:
             self.character_list.append(special_characters)
         if "nmb" in chars:
             self.character_list.append(numbers)
 
+    def get_character_list(self):
+        return self.character_list
+
+    # Developer function, generally don't use
+    def __set_character_list(self, char_list):
+        self.character_list = char_list
