@@ -3,7 +3,7 @@ import unittest
 
 from unittest.mock import Mock, create_autospec
 
-from Service.Encryption.VigenereEncrypter import VigenereEncrypterInterface
+from Service.Encryption.VigenereEncrypter import VigenereEncrypter
 from Service.Text.Vigeneretext import VigenereText
 
 
@@ -23,7 +23,7 @@ class TestClass(unittest.TestCase):
         key = 'AAAA'
         expected_answer = ['A', 'B', 'C', 'D']
         # -------------------Encrypt
-        encrypter = VigenereEncrypterInterface(mock)
+        encrypter = VigenereEncrypter(mock)
         encrypter.encrypt(key)
         answer = mock.cipher_character_list
 

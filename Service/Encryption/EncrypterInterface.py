@@ -1,4 +1,4 @@
-class EncrypterInterface():
+class EncrypterInterface:
     def __init__(self, reference):
         self.text = reference
 

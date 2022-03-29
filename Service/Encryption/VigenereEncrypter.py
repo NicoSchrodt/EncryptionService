@@ -28,7 +28,7 @@ def encryptVig(reference, key):
                                                           "Please add a character-set which contains character.")
 
 
-class VigenereEncrypterInterface(EncrypterInterface):
+class VigenereEncrypter(EncrypterInterface):
     def __init__(self, _reference):
         super().__init__(reference=_reference)
 
