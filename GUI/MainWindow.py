@@ -6,7 +6,7 @@ from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
 
-from Service.Encryption.VigenereEncrypter import VigenereEncrypter
+from Service.Encryption.VigenereEncrypter import VigenereEncrypterInterface
 from Service.Text.Vigeneretext import VigenereText
 
 
@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
             try:
                 text = VigenereText()
                 text.fill_character_list(self.clear_TE.toPlainText())
-                encrypter = VigenereEncrypter(text)
+                encrypter = VigenereEncrypterInterface(text)
                 encrypter.encrypt(self.lineEdit_key.text())
                 self.cipher_TE.setPlainText(text.get_cipher_string())
             except Exception as e:
