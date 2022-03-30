@@ -11,8 +11,17 @@ class Text:
         temp = characters.upper()
         for i in range(len(temp)):
             self.character_list.append(temp[i])
-        # stuff that fills the character_list
-        pass
+
+    def fill_cipher_list(self, characters):
+        temp = characters.upper()
+        for i in range(len(temp)):
+            self.cipher_character_list.append(temp[i])
+
+    def get_plain_string(self):
+        return_string = ""
+        for i in range(len(self.character_list)):
+            return_string = return_string + self.character_list[i]
+        return return_string
 
     def get_cipher_string(self):
         return_string = ""
