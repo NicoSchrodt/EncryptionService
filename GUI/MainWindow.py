@@ -46,4 +46,12 @@ class MainWindow(QMainWindow):
                 print("Encryption Error: " + str(e))
 
     def decrypt(self):
-        pass
+        if self.comboBox_chiffre.currentText() == "Vigenère-Chiffre":
+            try:
+                text = VigenereText()
+                text.fill_cipher_list(self.cipher_TE.toPlainText())
+                encrypter = VigenereEncrypter(text)
+                encrypter.decrypt(self.lineEdit_key.text())
+                self.clear_TE.setPlainText(text.get_plain_string())
+            except Exception as e:
+                print("Decryption Error: " + str(e))
