@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock, create_autospec
 
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
-from Service.Text.Vigeneretext import VigenereText
+from Service.Text.VigenereText import VigenereText
 
 
 class TestClass(unittest.TestCase):

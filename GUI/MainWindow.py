@@ -7,7 +7,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
 
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
-from Service.Text.Vigeneretext import VigenereText
+from Service.Text.VigenereText import VigenereText
 
 
 class MainWindow(QMainWindow):
