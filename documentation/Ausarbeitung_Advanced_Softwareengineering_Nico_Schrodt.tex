@@ -50,7 +50,6 @@
 \newcommand{\Betreuer}{Daniel Lindner}
 
 \newcommand{\DHBWLogoDeckblatt}{\includegraphics[width=4.5cm]{Logos/dhbw-logo}}
-\newcommand{\IntelDataLines}{\includegraphics[width=15cm]{Bilder/Intel8080_DataLines}}
 
 \newcommand{\Titel}{Entwerfen und Implementieren einer Verschlüsselungssoftware}
 \newcommand{\ArtArbeit}{Ausarbeitung}
@@ -87,29 +86,6 @@
 			Dozent & \Betreuer \\
 		\end{tabular}
 	\end{titlepage}
-
-\newpage
-
-\thispagestyle{empty}
-\begin{center}
-\Large\bfseries Erklärung
-\end{center}
-\medskip
-\noindent
-Ich versichere hiermit, dass ich meine \ArtArbeit \ mit
-dem Thema: 
-\begin{center}
-	 \Titel \ 
-\end{center}
-selbstständig verfasst und keine anderen als die angegebenen Quellen und
-Hilfsmittel benutzt haben. Ich versichere zudem, dass die eingereichte elektronische Fassung mit der
-gedruckten Fassung übereinstimmt (falls vorhanden).
-
-\vspace{3cm}
-\noindent
-\underline{\Ort, \today \hspace{9cm}}\\
-%\hfill\underline{\hspace{6cm}}\\
-Ort, Datum\hfill Unterschrift\hspace{4cm}
 
 \newpage
 
@@ -176,10 +152,10 @@ Der Quellcode kann in folgendem GitHub-Repository abgerufen werden:\\ \url{https
 \newpage
 
 \section{Clean Architecture}
-Platzhalter
+Der Sinn einer Clean Architecture ist es das Programm in klar definierte Schichten zu zerlegen die unabhängig voneinander ausgetauscht werden können. Dadurch soll idealerweise die Langlebigkeit und Wartbarkeit eines Projekts gewährleistet werden können.
 
 \subsection{Geplante Schichtenarchitektur}
-Platzhalter
+Für dieses Projekt sind zwei Schichten vorgesehen. Einmal die Benutzeroberfläche (GUI) welche mit Qt implementiert wird und die Logik, welche unter anderem die Verschlüsselung vornimmt. Der Benutzer soll ausschließlich mit der von Qt generierten Oberfläche interagieren z.B. durch Textfelder oder Knöpfe, welche vorkonfigurierte Befehle ausführen.
 
 \subsection{Umsetzung}
 Platzhalter
@@ -193,7 +169,15 @@ Platzhalter
 \newpage
 
 \section{Entwurfsmuster}
-Platzhalter
+Das für den Umfang dieses Programmentwurfs verwendete Entwurfsmuster ist der Dekorierer. Aufgabe des Dekorierers ist es eine Klasse oder Funktion um einen oder mehrere Aspekte zu erweitern ohne die Klasse selbst zu verändern. Das Entwurfsmuster wurde in der Klasse 'EncrypterInterface.py' angewendet.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/Decorator_before.png}
+\end{center}
+'EncrypterInterface' dient wie der Name bereits verrät als Interface für konkrete Encrypter. Dabei ist aber nicht gewährleistet, dass die konkrete Implementierung die im Interface beschriebenen Funktion selbst implementiert. Der Dekorierer soll hier die Aufgabe Übernehmen, auf eine konkrete Implementierung zu kontrollieren und bei Fehlen dieser eine Exception auszulösen.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/Decorator_after.png}
+\end{center}
+Die Funktion des Dekorierers beschränkt sich hier auf konkrete Implementierungen des EncrypterInterfaces, Also Klassen die von 'EncrypterInterface' erben. Das Interface selbst könnte potentiell immer noch instantiiert und verwendet werden ohne die Exception auszulösen.
 
 \newpage
 
