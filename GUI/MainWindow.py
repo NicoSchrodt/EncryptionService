@@ -6,7 +6,9 @@ from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
 
+from Service.Encryption.CaesarEncrypter import CaesarEncrypter
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
+from Service.Text.CaesarText import CaesarText
 from Service.Text.VigenereText import VigenereText
 
 
@@ -44,6 +46,15 @@ class MainWindow(QMainWindow):
                 self.cipher_TE.setPlainText(text.get_cipher_string())
             except Exception as e:
                 print("Encryption Error: " + str(e))
+        elif self.comboBox_chiffre.currentText() == "Caesar-Chiffre":
+            try:
+                text = CaesarText()
+                text.fill_character_list(self.clear_TE.toPlainText())
+                encrypter = CaesarEncrypter(text)
+                encrypter.encrypt(self.lineEdit_key.text())
+                self.cipher_TE.setPlainText(text.get_cipher_string())
+            except Exception as e:
+                print("Encryption Error: " + str(e))
 
     def decrypt(self):
         if self.comboBox_chiffre.currentText() == "Vigenère-Chiffre":
@@ -51,6 +62,15 @@ class MainWindow(QMainWindow):
                 text = VigenereText()
                 text.fill_cipher_list(self.cipher_TE.toPlainText())
                 encrypter = VigenereEncrypter(text)
+                encrypter.decrypt(self.lineEdit_key.text())
+                self.clear_TE.setPlainText(text.get_plain_string())
+            except Exception as e:
+                print("Decryption Error: " + str(e))
+        elif self.comboBox_chiffre.currentText() == "Caesar-Chiffre":
+            try:
+                text = CaesarText()
+                text.fill_cipher_list(self.cipher_TE.toPlainText())
+                encrypter = CaesarEncrypter(text)
                 encrypter.decrypt(self.lineEdit_key.text())
                 self.clear_TE.setPlainText(text.get_plain_string())
             except Exception as e:
