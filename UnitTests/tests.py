@@ -8,7 +8,7 @@ from Service.Text.VigenereText import VigenereText
 from Service.Text.EligibleCharacters import EligibleCharacters
 
 
-class TestClass(unittest.TestCase):
+class EncrypterTest(unittest.TestCase):
 
     def test_vigenere_encrypter(self):
         # -------------------Mock
@@ -30,22 +30,21 @@ class TestClass(unittest.TestCase):
 
         self.assertEqual(expected_answer, answer)
 
-    def test_set_character_list(self):
-        charset = EligibleCharacters()
-        self.assertEqual(charset.get_character_list(), [])
 
-        charset.set_character_list(["a", "b", "c"])
-        self.assertEqual(charset.get_character_list(), ["a", "b", "c"])
+class CharsetTest(unittest.TestCase):
+
+    def setUp(self):
+        self.charset = EligibleCharacters()
+        self.assertEqual(self.charset.get_character_list(), [])
+
+    def test_set_character_list(self):
+        self.charset.set_character_list(["a", "b", "c"])
+        self.assertEqual(self.charset.get_character_list(), ["a", "b", "c"])
 
     def test_add_to_character_list(self):
-        charset = EligibleCharacters()
-        self.assertEqual(charset.get_character_list(), [])
-
-        charset.character_list = ["a", "b", "c"]
-        charset.add_to_character_list(["d"])
-        self.assertEqual(charset.get_character_list(), ["a", "b", "c", "d"])
-
-
+        self.charset.character_list = ["a", "b", "c"]
+        self.charset.add_to_character_list(["d"])
+        self.assertEqual(self.charset.get_character_list(), ["a", "b", "c", "d"])
 
 
 if __name__ == '__main__':
