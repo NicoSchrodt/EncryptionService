@@ -7,5 +7,6 @@ def resource_path(relative_path):
     try:  # only work if python project was converted to exe file
         base_path = sys._MEIPASS
     except Exception:
-        base_path = os.path.abspath("..")
+        base_path = os.path.abspath(".")
+        print(base_path)
     return os.path.join(base_path, relative_path)

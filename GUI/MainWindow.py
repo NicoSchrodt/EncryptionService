@@ -1,7 +1,5 @@
 import os.path
-import sys
 
-from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
@@ -10,6 +8,8 @@ from Service.Encryption.CaesarEncrypter import CaesarEncrypter
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
 from Service.Text.CaesarText import CaesarText
 from Service.Text.VigenereText import VigenereText
+
+from Service.ResourcePath import resource_path
 
 
 class MainWindow(QMainWindow):
@@ -32,8 +32,7 @@ class MainWindow(QMainWindow):
         decrypt_button.clicked.connect(self.decrypt)
 
     def init_ui(self, ui_name):
-        base_path = os.path.abspath(".")
-        full_path = os.path.join(base_path, ui_name)
+        full_path = resource_path(ui_name)
         loadUi(full_path, self)
 
     def encrypt(self):
