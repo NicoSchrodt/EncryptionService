@@ -3,30 +3,85 @@ import unittest
 
 from unittest.mock import Mock, create_autospec
 
+from Service.Encryption.CaesarEncrypter import CaesarEncrypter
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
+from Service.Text.CaesarText import CaesarText
 from Service.Text.VigenereText import VigenereText
 from Service.Text.EligibleCharacters import EligibleCharacters
 
 
-class EncrypterTest(unittest.TestCase):
+class VigenereEncrypterTest(unittest.TestCase):
 
-    def test_vigenere_encrypter(self):
+    def setUp(self):
         # -------------------Mock
-        mock = create_autospec(VigenereText)
+        self.mock = create_autospec(VigenereText)
         temp = string.ascii_uppercase
         character_list = []
         for i in range(len(temp)):
             character_list.append(temp[i])
-        mock.get_eligible_characters.return_value = character_list
+        self.mock.get_eligible_characters.return_value = character_list
+
+    def test_vigenere_encrypter_encrypt(self):
         # -------------------Parameters
-        mock.character_list = ['A', 'B', 'C', 'D']
-        mock.cipher_character_list = []
+        self.mock.character_list = ['A', 'B', 'C', 'D']
+        self.mock.cipher_character_list = []
         key = 'AAAA'
         expected_answer = ['A', 'B', 'C', 'D']
         # -------------------Encrypt
-        encrypter = VigenereEncrypter(mock)
+        encrypter = VigenereEncrypter(self.mock)
         encrypter.encrypt(key)
-        answer = mock.cipher_character_list
+        answer = self.mock.cipher_character_list
+
+        self.assertEqual(expected_answer, answer)
+
+    def test_vigenere_encrypter_decrypt(self):
+        # -------------------Parameters
+        self.mock.character_list = []
+        self.mock.cipher_character_list = ['A', 'B', 'C', 'D']
+        key = 'AAAA'
+        expected_answer = ['A', 'B', 'C', 'D']
+        # -------------------Encrypt
+        encrypter = VigenereEncrypter(self.mock)
+        encrypter.encrypt(key)
+        answer = self.mock.cipher_character_list
+
+        self.assertEqual(expected_answer, answer)
+
+
+class CaesarEncrypterTest(unittest.TestCase):
+
+    def setUp(self):
+        # -------------------Mock
+        self.mock = create_autospec(CaesarText)
+        temp = string.ascii_uppercase
+        character_list = []
+        for i in range(len(temp)):
+            character_list.append(temp[i])
+        self.mock.get_eligible_characters.return_value = character_list
+
+    def test_caesar_encrypter_encrypt(self):
+        # -------------------Parameters
+        self.mock.character_list = ['A', 'B', 'C', 'D']
+        self.mock.cipher_character_list = []
+        key = 'B'
+        expected_answer = ['B', 'C', 'D', 'E']
+        # -------------------Encrypt
+        encrypter = CaesarEncrypter(self.mock)
+        encrypter.encrypt(key)
+        answer = self.mock.cipher_character_list
+
+        self.assertEqual(expected_answer, answer)
+
+    def test_caesar_encrypter_decrypt(self):
+        # -------------------Parameters
+        self.mock.character_list = []
+        self.mock.cipher_character_list = ['B', 'C', 'D', 'E']
+        key = 'B'
+        expected_answer = ['A', 'B', 'C', 'D']
+        # -------------------Encrypt
+        encrypter = CaesarEncrypter(self.mock)
+        encrypter.decrypt(key)
+        answer = self.mock.character_list
 
         self.assertEqual(expected_answer, answer)
 
