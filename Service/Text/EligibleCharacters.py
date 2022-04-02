@@ -24,5 +24,9 @@ class EligibleCharacters:
         return self.character_list
 
     # Developer function, generally don't use
-    def __set_character_list(self, char_list):
+    def set_character_list(self, char_list):
         self.character_list = char_list
+
+    def add_to_character_list(self, char_list):
+        for i in char_list:
+            self.character_list.append(i)
