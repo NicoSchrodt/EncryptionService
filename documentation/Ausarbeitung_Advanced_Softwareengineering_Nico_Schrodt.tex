@@ -182,31 +182,58 @@ Die Funktion des Dekorierers beschränkt sich hier auf konkrete Implementierunge
 \newpage
 
 \section{Programming Principles}
-Platzhalter
+In diesem Abschnitt werden kurz einige Programming Principles erläutert und deren Anwendung an Beispielen in diesem Projekt aufgezeigt.
 
 \subsection{SOLID}
+\subsubsection{Single Responsible Principle}
+Platzhalter
+
+\subsubsection{Open/Closed Principle}
+Platzhalter
+
+\subsubsection{Liskov Substitution Principle}
+Platzhalter
+
+\subsubsection{Interface Segregation Principle}
+Platzhalter
+
+\subsubsection{Dependency Inversion Principle}
 Platzhalter
 
 \subsection{GRASP}
+
+\subsubsection{Low Coupling}
+Platzhalter
+
+\subsubsection{High Cohesion}
 Platzhalter
 
 \subsection{DRY}
-Platzhalter
+DRY steht für 'Don't repeat yourself'. Zentraler Angelpunkt dieses Prinzips ist das Vermeiden von Code Duplikaten, sowie das Strukturieren des Programmcodes in einer Weise das nur logisch verknüpfte Elemente sich gegenseitig beeinflussen. Oder in anderen Worten, jedes logische Konstrukt im Quellcode muss durch eine klare von anderen Aspekten getrennte Struktur repräsentiert werden. Dadurch lassen sich z.B. einige Code Smells verhindern wie "Duplicated Code" oder "Shotgun Surgery".\\
+Das Prinzip wurde angewendet hinsichtlich dem vermeiden von Code Duplikaten, welche sich unter anderem in zahlreichen Klassen die für die Verschlüsselung zuständig sind befanden, da der Prozess der Ver- und Entschlüsselung je nach Verfahren recht ähnlich ist (bspw. Vigenère- oder Caesar-Chiffre).
 
 \newpage
 
 \section{Refactoring}
-Platzhalter
+Das Ziel von Refactoring ist das Verbessern der Codequalität. Für diese Arbeit ist es unterteilt in das Identifizieren von 3 verschiedenen Code Smells und das Anwenden von 2 Refactorings.
 
 \subsection{Code Smells}
+Unter 'Code Smells' versteht man Stellen im Programmcode, welche Verbesserungspotential aufweisen bspw. bezüglich der Übersichtlichkeit.\\ (\textbf{Anmerkung: }Die hier aufgelisteten Code Smells sind womöglich nicht mehr in der neuesten Version des Projekts zu finden, sondern nur noch in älteren Commits)
+
+\subsubsection{Code Smells 1 Duplicated Code}
+Dieses Beispiel für einen 'Duplicated Code'- Code Smells ist in der 'Caesar-Encrypter.py'- Datei zu finden. Ausschlaggebend ist hierbei, dass das Verfahren zum Ver- und Entschlüsseln effektiv gleich ist mit der Ausnahme, welcher der Starttext ist und in welche Richtung (Positiv/Negativ) der Schlüssel anzuwenden ist.
+\begin{center}
+	\includegraphics[width=15cm]{bilder/CodeSmells1_a.png}
+\end{center}
+\begin{center}
+	\includegraphics[width=15cm]{bilder/CodeSmells1_b.png}
+\end{center}
+
+\subsubsection{Code Smells 2 Long Method}
 Platzhalter
 
-\subsubsection{Code Smells 1}
-Platzhalter
-\subsubsection{Code Smells 2}
-Platzhalter
-\subsubsection{Code Smells 3}
-Platzhalter
+\subsubsection{Code Smells 3 Large Class}
+Der dritte Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große Klasse die unter anderem zu viele Instanzvariablen, Methoden oder allgemein Codezeilen aufweist.
 
 \subsection{Angewendete Refactorings}
 Platzhalter
