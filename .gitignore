@@ -1,4 +1,5 @@
 .gitignore
+.coveragerc
 venv
 .idea
 /documentation/Ausarbeitung_Advanced_Softwareengineering_Nico_Schrodt.aux
