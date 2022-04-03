@@ -1,7 +1,5 @@
-import os.path
-
-from PyQt6.QtWidgets import QMainWindow
 from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QMainWindow
 from PyQt6.uic import loadUi
 
 from Service.Encryption.CaesarEncrypter import CaesarEncrypter
