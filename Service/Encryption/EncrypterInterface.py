@@ -8,9 +8,9 @@ class EncrypterInterface(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def encrypt(self, key):
         # Encrypt the character list in text-object
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover
 
     @abc.abstractmethod
     def decrypt(self, key):
         # Decrypt the character list in text-object
-        raise NotImplementedError
+        raise NotImplementedError  # pragma: no cover

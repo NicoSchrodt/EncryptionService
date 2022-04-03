@@ -1,16 +1,17 @@
-import string
-import unittest
+import string  # pragma: no cover
+import unittest  # pragma: no cover
 
-from unittest.mock import Mock, create_autospec
+from unittest.mock import create_autospec  # pragma: no cover
 
-from Service.Encryption.CaesarEncrypter import CaesarEncrypter
-from Service.Encryption.VigenereEncrypter import VigenereEncrypter
-from Service.Text.CaesarText import CaesarText
-from Service.Text.VigenereText import VigenereText
-from Service.Text.EligibleCharacters import EligibleCharacters
+from Service.Encryption.CaesarEncrypter import CaesarEncrypter  # pragma: no cover
+from Service.Encryption.EncrypterInterface import EncrypterInterface  # pragma: no cover
+from Service.Encryption.VigenereEncrypter import VigenereEncrypter  # pragma: no cover
+from Service.Text.CaesarText import CaesarText  # pragma: no cover
+from Service.Text.VigenereText import VigenereText  # pragma: no cover
+from Service.Text.EligibleCharacters import EligibleCharacters  # pragma: no cover
 
 
-class VigenereEncrypterTest(unittest.TestCase):
+class VigenereEncrypterTest(unittest.TestCase):  # pragma: no cover
 
     def setUp(self):
         # -------------------Mock
@@ -48,7 +49,7 @@ class VigenereEncrypterTest(unittest.TestCase):
         self.assertEqual(expected_answer, answer)
 
 
-class CaesarEncrypterTest(unittest.TestCase):
+class CaesarEncrypterTest(unittest.TestCase):  # pragma: no cover
 
     def setUp(self):
         # -------------------Mock
@@ -77,7 +78,8 @@ class CaesarEncrypterTest(unittest.TestCase):
         self.mock.character_list = []
         self.mock.cipher_character_list = ['B', 'C', 'D', 'E']
         key = 'B'
-        expected_answer = ['A', 'B', 'C', 'D']
+        expected_answer = [''
+                           'A', 'B', 'C', 'D']
         # -------------------Encrypt
         encrypter = CaesarEncrypter(self.mock)
         encrypter.decrypt(key)
@@ -86,7 +88,7 @@ class CaesarEncrypterTest(unittest.TestCase):
         self.assertEqual(expected_answer, answer)
 
 
-class CharsetTest(unittest.TestCase):
+class CharsetTest(unittest.TestCase):  # pragma: no cover
 
     def setUp(self):
         self.charset = EligibleCharacters()
@@ -102,5 +104,12 @@ class CharsetTest(unittest.TestCase):
         self.assertEqual(self.charset.get_character_list(), ["a", "b", "c", "d"])
 
 
-if __name__ == '__main__':
+class EncrypterInterfaceTest(unittest.TestCase):  # pragma: no cover
+
+    def test_interface_error(self):
+        with self.assertRaises(TypeError):
+            encrypter = EncrypterInterface()
+
+
+if __name__ == '__main__':  # pragma: no cover
     unittest.main()
