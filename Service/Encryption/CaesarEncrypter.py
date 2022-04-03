@@ -6,6 +6,7 @@ class CaesarEncrypter(EncrypterInterface):
         super().__init__(reference=_reference)
 
     def encrypt(self, key):
+        key = key.upper()
         local_list = self.text.character_list
         local_eligible_character_list = self.text.get_eligible_characters()
         num_elg_chars = len(local_eligible_character_list)
@@ -20,8 +21,8 @@ class CaesarEncrypter(EncrypterInterface):
             except ValueError:
                 self.text.cipher_character_list.append(local_list[i])
                 if local_list[i] != " ":
-                    print("Invalid character '" + local_list[i] + "' found, skipped. "
-                                                                  "Please add a character-set which contains character.")
+                    print("Invalid character '" + local_list[i] + "' found, skipped. Please add a character-set which "
+                                                                  "contains character.")
 
     def decrypt(self, key):
         local_list = self.text.cipher_character_list
@@ -38,5 +39,5 @@ class CaesarEncrypter(EncrypterInterface):
             except ValueError:
                 self.text.character_list.append(local_list[i])
                 if local_list[i] != " ":
-                    print("Invalid character '" + local_list[i] + "' found, skipped. "
-                                                                  "Please add a character-set which contains character.")
+                    print("Invalid character '" + local_list[i] + "' found, skipped. Please add a character-set which "
+                                                                  "contains character.")
