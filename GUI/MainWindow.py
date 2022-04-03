@@ -31,46 +31,47 @@ class MainWindow(QMainWindow):
         decrypt_button = self.button_decrypt
         decrypt_button.clicked.connect(self.decrypt)
 
+        self.encryption_dict = {
+            "Vigenère": 0,
+            "Caesar": 1,
+            "Encrypt": 2,
+            "Decrypt": 3
+        }
+
     def init_ui(self, ui_name):
         full_path = resource_path(ui_name)
         loadUi(full_path, self)
 
+    def en_de_crypt(self, dict_value, dict_value_2):
+        if self.encryption_dict["Vigenère"] == dict_value:
+            text = VigenereText()
+            encrypter = VigenereEncrypter(text)
+        elif self.encryption_dict["Caesar"] == dict_value:
+            text = CaesarText()
+            encrypter = CaesarEncrypter(text)
+        if self.encryption_dict["Encrypt"] == dict_value_2:
+            text.fill_character_list(self.clear_TE.toPlainText())
+            encrypter.encrypt(self.lineEdit_key.text())
+            self.cipher_TE.setPlainText(text.get_cipher_string())
+        elif self.encryption_dict["Decrypt"] == dict_value_2:
+            text.fill_cipher_list(self.cipher_TE.toPlainText())
+            encrypter.decrypt(self.lineEdit_key.text())
+            self.clear_TE.setPlainText(text.get_plain_string())
+
     def encrypt(self):
-        if self.comboBox_chiffre.currentText() == "Vigenère-Chiffre":
-            try:
-                text = VigenereText()
-                text.fill_character_list(self.clear_TE.toPlainText())
-                encrypter = VigenereEncrypter(text)
-                encrypter.encrypt(self.lineEdit_key.text())
-                self.cipher_TE.setPlainText(text.get_cipher_string())
-            except Exception as e:
-                print("Encryption Error: " + str(e))
-        elif self.comboBox_chiffre.currentText() == "Caesar-Chiffre":
-            try:
-                text = CaesarText()
-                text.fill_character_list(self.clear_TE.toPlainText())
-                encrypter = CaesarEncrypter(text)
-                encrypter.encrypt(self.lineEdit_key.text())
-                self.cipher_TE.setPlainText(text.get_cipher_string())
-            except Exception as e:
-                print("Encryption Error: " + str(e))
+        try:
+            if self.comboBox_chiffre.currentText() == "Vigenère-Chiffre":
+                self.en_de_crypt(self.encryption_dict["Vigenère"], self.encryption_dict["Encrypt"])
+            elif self.comboBox_chiffre.currentText() == "Caesar-Chiffre":
+                self.en_de_crypt(self.encryption_dict["Caesar"], self.encryption_dict["Encrypt"])
+        except Exception as e:
+            print("Encryption Error: " + str(e))
 
     def decrypt(self):
-        if self.comboBox_chiffre.currentText() == "Vigenère-Chiffre":
-            try:
-                text = VigenereText()
-                text.fill_cipher_list(self.cipher_TE.toPlainText())
-                encrypter = VigenereEncrypter(text)
-                encrypter.decrypt(self.lineEdit_key.text())
-                self.clear_TE.setPlainText(text.get_plain_string())
-            except Exception as e:
-                print("Decryption Error: " + str(e))
-        elif self.comboBox_chiffre.currentText() == "Caesar-Chiffre":
-            try:
-                text = CaesarText()
-                text.fill_cipher_list(self.cipher_TE.toPlainText())
-                encrypter = CaesarEncrypter(text)
-                encrypter.decrypt(self.lineEdit_key.text())
-                self.clear_TE.setPlainText(text.get_plain_string())
-            except Exception as e:
-                print("Decryption Error: " + str(e))
+        try:
+            if self.comboBox_chiffre.currentText() == "Vigenère-Chiffre":
+                self.en_de_crypt(self.encryption_dict["Vigenère"], self.encryption_dict["Decrypt"])
+            elif self.comboBox_chiffre.currentText() == "Caesar-Chiffre":
+                self.en_de_crypt(self.encryption_dict["Caesar"], self.encryption_dict["Decrypt"])
+        except Exception as e:
+            print("Decryption Error: " + str(e))
