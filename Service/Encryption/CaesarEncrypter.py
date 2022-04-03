@@ -25,6 +25,7 @@ class CaesarEncrypter(EncrypterInterface):
                                                                   "contains character.")
 
     def decrypt(self, key):
+        key = key.upper()
         local_list = self.text.cipher_character_list
         local_eligible_character_list = self.text.get_eligible_characters()
         num_elg_chars = len(local_eligible_character_list)
