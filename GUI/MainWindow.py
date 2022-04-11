@@ -16,6 +16,8 @@ class MainWindow(QMainWindow):
         self.init_ui("GUI\\MainWindow.ui")
 
         self.setWindowFlags(Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.MSWindowsFixedSizeDialogHint)
+        self.encrypter = None
+        self.text = None
 
         # Exit Button
         exit_button = self.button_Exit
@@ -40,21 +42,36 @@ class MainWindow(QMainWindow):
         full_path = resource_path(ui_name)
         loadUi(full_path, self)
 
-    def en_de_crypt(self, dict_value, dict_value_2):
+    def set_Text(self, dict_value):
         if self.encryption_dict["Vigenère"] == dict_value:
-            text = VigenereText()
-            encrypter = VigenereEncrypter(text)
+            self.text = VigenereText()
         elif self.encryption_dict["Caesar"] == dict_value:
-            text = CaesarText()
-            encrypter = CaesarEncrypter(text)
+            self.text = CaesarText()
+
+    def set_Encrypter(self, dict_value):
+        if self.encryption_dict["Vigenère"] == dict_value:
+            self.encrypter = VigenereEncrypter(self.text)
+        elif self.encryption_dict["Caesar"] == dict_value:
+            self.encrypter = CaesarEncrypter(self.text)
+
+    def do_encrypt(self):
+        self.text.fill_character_list(self.clear_TE.toPlainText())
+        self.encrypter.encrypt(self.lineEdit_key.text())
+        self.cipher_TE.setPlainText(self.text.get_cipher_string())
+
+    def do_decrypt(self):
+        self.text.fill_cipher_list(self.cipher_TE.toPlainText())
+        self.encrypter.decrypt(self.lineEdit_key.text())
+        self.clear_TE.setPlainText(self.text.get_plain_string())
+
+    def en_de_crypt(self, dict_value, dict_value_2):
+        self.set_Text(dict_value)
+        self.set_Encrypter(dict_value)
+
         if self.encryption_dict["Encrypt"] == dict_value_2:
-            text.fill_character_list(self.clear_TE.toPlainText())
-            encrypter.encrypt(self.lineEdit_key.text())
-            self.cipher_TE.setPlainText(text.get_cipher_string())
+            self.do_encrypt()
         elif self.encryption_dict["Decrypt"] == dict_value_2:
-            text.fill_cipher_list(self.cipher_TE.toPlainText())
-            encrypter.decrypt(self.lineEdit_key.text())
-            self.clear_TE.setPlainText(text.get_plain_string())
+            self.do_decrypt()
 
     def encrypt(self):
         try:
