@@ -70,11 +70,14 @@ class MainWindow(QMainWindow):
         else:
             raise ValueError
 
-    def set_Charset(self, charset):
+    def set_Charset_local(self, charset):
         if isinstance(charset, EligibleCharacters):
             self.charset = charset
         else:
             raise TypeError
+
+    def insert_Charset_in_text(self):
+        self.text.set_eligible_characters(self.charset)
 
     def do_encrypt(self):
         self.text.fill_character_list(self.clear_TE.toPlainText())
@@ -88,6 +91,8 @@ class MainWindow(QMainWindow):
 
     def en_de_crypt(self, dict_value, dict_value_2):
         self.set_Text(dict_value)
+        if self.charset is not None:
+            self.insert_Charset_in_text()
         self.set_Encrypter(dict_value)
 
         if self.encryption_dict["Encrypt"] == dict_value_2:
