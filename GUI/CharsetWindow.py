@@ -56,6 +56,7 @@ class CharsetWindow(QMainWindow):
         for i in self.charset.get_character_list():
             temp = temp + i
         self.currentCharacters.setPlainText(temp)
+        self.copy_to_MainWindow()
 
     def copy_to_MainWindow(self):
-        self.MainWindow.charset = self.charset
+        self.MainWindow.set_Charset_local(self.charset)
