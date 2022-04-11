@@ -11,18 +11,16 @@ class EligibleCharacters:
 
     def insert_predefined_into_character_list(self, chars):
         if "std" in chars and "std" not in self.predefined_inserted:
-            for i in range(len(string.ascii_uppercase)):
-                self.character_list.append(string.ascii_uppercase[i])
+            self.add_to_character_list(string.ascii_uppercase)
             self.predefined_inserted.append("std")
         if "std_low" in chars and "std_low" not in self.predefined_inserted:
-            for i in range(len(string.ascii_lowercase)):
-                self.character_list.append(string.ascii_lowercase[i])
+            self.add_to_character_list(string.ascii_lowercase)
             self.predefined_inserted.append("std_low")
         if "sc" in chars and "sc" not in self.predefined_inserted:
-            self.character_list.append(special_characters)
+            self.add_to_character_list(special_characters)
             self.predefined_inserted.append("sc")
         if "nmb" in chars and "nmb" not in self.predefined_inserted:
-            self.character_list.append(numbers)
+            self.add_to_character_list(numbers)
             self.predefined_inserted.append("nmb")
 
     def get_character_list(self):
