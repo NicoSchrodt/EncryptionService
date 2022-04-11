@@ -130,7 +130,7 @@
     <property name="title">
      <string>Settings</string>
     </property>
-    <addaction name="actionChange_CharSet"/>
+    <addaction name="actionChangeCharset"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -141,7 +141,7 @@
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionChange_CharSet">
+  <action name="actionChangeCharset">
    <property name="text">
     <string>Change CharSet</string>
    </property>

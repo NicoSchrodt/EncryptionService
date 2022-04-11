@@ -2,9 +2,12 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.uic import loadUi
 
+from GUI.CharsetWindow import CharsetWindow
+
 from Service.Encryption.CaesarEncrypter import CaesarEncrypter
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
 from Service.Text.CaesarText import CaesarText
+from Service.Text.EligibleCharacters import EligibleCharacters
 from Service.Text.VigenereText import VigenereText
 
 from Service.ResourcePath import resource_path
@@ -18,6 +21,7 @@ class MainWindow(QMainWindow):
         self.setWindowFlags(Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.MSWindowsFixedSizeDialogHint)
         self.encrypter = None
         self.text = None
+        self.charset = None
 
         # Exit Button
         exit_button = self.button_Exit
@@ -31,6 +35,10 @@ class MainWindow(QMainWindow):
         decrypt_button = self.button_decrypt
         decrypt_button.clicked.connect(self.decrypt)
 
+        # Menubar Settings
+        ChangeCharset = self.actionChangeCharset
+        ChangeCharset.triggered.connect(self.open_CharsetWindow)
+
         self.encryption_dict = {
             "Vigenère": 0,
             "Caesar": 1,
@@ -42,17 +50,31 @@ class MainWindow(QMainWindow):
         full_path = resource_path(ui_name)
         loadUi(full_path, self)
 
+    def open_CharsetWindow(self):
+        self.dialog = CharsetWindow(self)
+        self.dialog.show()
+
     def set_Text(self, dict_value):
         if self.encryption_dict["Vigenère"] == dict_value:
             self.text = VigenereText()
         elif self.encryption_dict["Caesar"] == dict_value:
             self.text = CaesarText()
+        else:
+            raise ValueError
 
     def set_Encrypter(self, dict_value):
         if self.encryption_dict["Vigenère"] == dict_value:
             self.encrypter = VigenereEncrypter(self.text)
         elif self.encryption_dict["Caesar"] == dict_value:
             self.encrypter = CaesarEncrypter(self.text)
+        else:
+            raise ValueError
+
+    def set_Charset(self, charset):
+        if isinstance(charset, EligibleCharacters):
+            self.charset = charset
+        else:
+            raise TypeError
 
     def do_encrypt(self):
         self.text.fill_character_list(self.clear_TE.toPlainText())
