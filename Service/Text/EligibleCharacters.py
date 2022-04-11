@@ -7,18 +7,23 @@ numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 class EligibleCharacters:
     def __init__(self):
         self.character_list = []
+        self.predefined_inserted = []
 
     def insert_predefined_into_character_list(self, chars):
-        if "std" in chars:
+        if "std" in chars and "std" not in self.predefined_inserted:
             for i in range(len(string.ascii_uppercase)):
                 self.character_list.append(string.ascii_uppercase[i])
-        if "std_low" in chars:
+            self.predefined_inserted.append("std")
+        if "std_low" in chars and "std_low" not in self.predefined_inserted:
             for i in range(len(string.ascii_lowercase)):
                 self.character_list.append(string.ascii_lowercase[i])
-        if "sc" in chars:
+            self.predefined_inserted.append("std_low")
+        if "sc" in chars and "sc" not in self.predefined_inserted:
             self.character_list.append(special_characters)
-        if "nmb" in chars:
+            self.predefined_inserted.append("sc")
+        if "nmb" in chars and "nmb" not in self.predefined_inserted:
             self.character_list.append(numbers)
+            self.predefined_inserted.append("nmb")
 
     def get_character_list(self):
         return self.character_list
@@ -26,7 +31,9 @@ class EligibleCharacters:
     # Developer function, generally don't use
     def set_character_list(self, char_list):
         self.character_list = char_list
+        self.predefined_inserted = []
 
     def add_to_character_list(self, char_list):
         for i in char_list:
-            self.character_list.append(i)
+            if i not in self.character_list:
+                self.character_list.append(i)
