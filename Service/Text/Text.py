@@ -39,8 +39,11 @@ class Text:
     def clear_ciphertext(self):
         self.cipher_character_list = []
 
-    def set_eligible_characters(self, def_list):
+    def set_eligible_characters_list(self, def_list):
         self.eligible_characters.insert_predefined_into_character_list(def_list)
 
     def get_eligible_characters(self):
         return self.eligible_characters.character_list
+
+    def set_eligible_characters(self, charset):
+        self.eligible_characters = charset
