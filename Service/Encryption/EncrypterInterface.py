@@ -14,3 +14,11 @@ class EncrypterInterface(metaclass=abc.ABCMeta):
     def decrypt(self, key):
         # Decrypt the character list in text-object
         raise NotImplementedError  # pragma: no cover
+
+    def validateKey(self, key):
+        Charset = self.text.get_eligible_characters()
+        validKey = ""
+        for i in key:
+            if i in Charset:
+                validKey = validKey + i
+        return validKey
