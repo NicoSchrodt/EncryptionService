@@ -14,11 +14,10 @@ class CaesarEncrypter(EncrypterInterface):
         self.key_length = 1
 
     def encrypt(self, key):
-        print(len(key))
         if not check_key_length(key, self.key_length):
             print("Invalid Key length!")
-            return
-        key = key.upper()
+            raise ValueError
+        key = self.validateKey(key)
         local_list = self.text.character_list
         local_eligible_character_list = self.text.get_eligible_characters()
         num_elg_chars = len(local_eligible_character_list)
@@ -39,8 +38,8 @@ class CaesarEncrypter(EncrypterInterface):
     def decrypt(self, key):
         if not check_key_length(key, self.key_length):
             print("Invalid Key length!")
-            return
-        key = key.upper()
+            raise ValueError
+        key = self.validateKey(key)
         local_list = self.text.cipher_character_list
         local_eligible_character_list = self.text.get_eligible_characters()
         num_elg_chars = len(local_eligible_character_list)

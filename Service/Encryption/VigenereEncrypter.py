@@ -6,7 +6,8 @@ class VigenereEncrypter(EncrypterInterface):
         super().__init__(reference=_reference)
 
     def encrypt(self, key):
-        key_list = [char for char in key.upper()]
+        key = self.validateKey(key)
+        key_list = [char for char in key]
         key_len = len(key_list)
         key_counter = 0
         local_list = self.text.character_list
@@ -30,7 +31,8 @@ class VigenereEncrypter(EncrypterInterface):
                                                                   "Please add a character-set which contains character.")
 
     def decrypt(self, key):
-        key_list = [char for char in key.upper()]
+        key = self.validateKey(key)
+        key_list = [char for char in key]
         key_len = len(key_list)
         key_counter = 0
         local_list = self.text.cipher_character_list
