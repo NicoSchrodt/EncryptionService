@@ -203,12 +203,12 @@ Das Liskov Substitution Principle vermittelt das Prinzip, das jede Spezialisieru
 Mit dem Interface Segregation Principle soll verhindert werden, dass Klassen ein über-spezifiziertes Interface verwenden. Ein verwendetes Interface soll also möglichst schlank sein und nicht zu viele Funktionen auf einmal anbieten. Damit soll verhindert werden, dass Klassen Zugriff auf Funktionen haben die sie gar nicht verwenden.
 
 \subsubsection{Dependency Inversion Principle}
-Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplung. Klassen auf einer höheren Ebene bspw. der Logik eines Programms solle nicht von niedrigeren Klassen z.B. Benutzerinterfaces abhängen.
+Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplung. Klassen auf einer höheren Ebene bspw. der Logik eines Programms solle nicht von niedrigeren Klassen z.B. Benutzerinterfaces abhängen. Dies wird unter anderem durch Verschieben der Abhängigkeit erreicht, bspw. auf ein Interface und dem Übergeben von Referenzen auf konkrete Instanzen.
 
 \subsection{GRASP}
 
 \subsubsection{Low Coupling}
-Platzhalter
+'Low Coupling' oder 'Niedrige Kopplung' meint das Prinzip, dass Programmcode besser ist je weniger Abhängigkeiten auf die Umgebung bestehen bzw. diese möglichst nah beieinander sind.
 
 \subsubsection{High Cohesion}
 Platzhalter
@@ -238,7 +238,11 @@ Dieses Beispiel für einen 'Duplicated Code'- Code Smells ist in der 'Caesar-Enc
 Platzhalter
 
 \subsubsection{Code Smells 3 Large Class}
-Der dritte Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große Klasse die unter anderem zu viele Instanzvariablen, Methoden oder allgemein Codezeilen aufweist.
+Der dritte Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große Klasse die unter anderem zu viele Instanzvariablen, Methoden oder allgemein Codezeilen aufweist. Als Beispiel dafür ist in der unteren Abbildung die MainWindow-Klasse zu sehen.
+\begin{center}
+	\includegraphics[width=5cm]{bilder/CodeSmells3.png}
+\end{center}
+Mit ~130 Zeilen Code und 10 verschiedenen Funktionen ist der Umfang der Klasse etwas zu groß. Abhilfe könnte geschaffen werden indem man beispielsweise einige Funktionen die die Handhabung der Verschlüsselung übernehmen in eine neue View-Klasse auslagert o.Ä.
 
 \subsection{Angewendete Refactorings}
 Platzhalter
@@ -252,10 +256,13 @@ Platzhalter
 \newpage
 
 \section{Unit Tests}
-Platzhalter
+Die Aufgabe von Unit Tests ist es einen jeweils möglichst kleinen Teil eines Systems zu testen. Dabei sollen nur relevante Teile des Systems im Test verwendet werden. Bestehen Abhängigkeiten zu anderen Teilen des Systems, so werden diese mit Stellvertreterobjekten besetzt. Ziel dieser Tests ist das Sicherstellen der Funktionalität der einzelnen Komponenten.
 
 \subsection{Verwendete Unit Tests und getesteter Code}
-Platzhalter
+Um den Umfang der Tests möglichst überschaubar zu halten wurden lediglich die Funktionen der Logik-Schicht getestet. Insbesondere die Verschlüsselung, aber auch die darin relevanten Charset- und Interface Klassen erhielten UnitTests.
+\begin{center}
+	\includegraphics[width=8cm]{bilder/Tests.png}
+\end{center}
 
 \subsubsection{Mocks}
 Platzhalter
