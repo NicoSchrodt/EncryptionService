@@ -185,20 +185,25 @@ Die Funktion des Dekorierers beschränkt sich hier auf konkrete Implementierunge
 In diesem Abschnitt werden kurz einige Programming Principles erläutert und deren Anwendung an Beispielen in diesem Projekt aufgezeigt.
 
 \subsection{SOLID}
-\subsubsection{Single Responsible Principle}
-Platzhalter
+\subsubsection{Single Responsibility Principle}
+Das Single Responsibility Principle steht für die Anforderung das jede Klasse nur eine einzige Aufgabe bzw. Verantwortung haben soll. Sinn dahinter ist es Komplexität und unerwünschte Kopplung zu vermeiden. Generell ist nämlich davon auszugehen das eine Klasse mit mehreren Verantwortungen Interaktionen zwischen diesen hat, was unter anderem das Ändern einzelner erschwert.
+Als Beispiel dafür wird in der unteren Abbildung eine konkrete Implementierung der Encrypter Klasse hergezogen.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/SRP.png}
+\end{center}
+Die Klasse hat effektiv eine Aufgabe. Sie erhält bei Instanziierung ein Textobjekt. Auf diesem Textobjekt werden Verschlüsselungen durchgeführt, dabei wird lediglich zwischen Ver- und Entschlüsseln unterscheiden.
 
 \subsubsection{Open/Closed Principle}
-Platzhalter
+Das Open/Closed Principle beschreibt das Designziel Klassen, Funktionen, etc. so aufzubauen das sie offen sind für Erweiterungen und geschlossen für Veränderungen. Konkret heißt das, neue Anforderungen sollen eher durch z.B. Vererbung realisiert werden, statt konkreten Modifikationen in der relevanten Klasse.
 
 \subsubsection{Liskov Substitution Principle}
-Platzhalter
+Das Liskov Substitution Principle vermittelt das Prinzip, das jede Spezialisierung, z.B. durch Polymorphie bei Vererbung, an jeder Stelle verwendet werden können muss an der auch die Generalisierung verwendet wird. Beispielsweise soll also die Funktion einer Erbenden Klasse nicht zu einem Fehler führen an einer Stelle an der die Funktion der Ursprungsklasse funktioniert hat.
 
 \subsubsection{Interface Segregation Principle}
-Platzhalter
+Mit dem Interface Segregation Principle soll verhindert werden, dass Klassen ein über-spezifiziertes Interface verwenden. Ein verwendetes Interface soll also möglichst schlank sein und nicht zu viele Funktionen auf einmal anbieten. Damit soll verhindert werden, dass Klassen Zugriff auf Funktionen haben die sie gar nicht verwenden.
 
 \subsubsection{Dependency Inversion Principle}
-Platzhalter
+Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplung. Klassen auf einer höheren Ebene bspw. der Logik eines Programms solle nicht von niedrigeren Klassen z.B. Benutzerinterfaces abhängen.
 
 \subsection{GRASP}
 
