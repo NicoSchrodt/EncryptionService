@@ -23,6 +23,8 @@ class MainWindow(QMainWindow):
         self.text = None
         self.charset = None
 
+        self.dialog = None
+
         # Exit Button
         exit_button = self.button_Exit
         exit_button.clicked.connect(self.close)
@@ -35,6 +37,10 @@ class MainWindow(QMainWindow):
         decrypt_button = self.button_decrypt
         decrypt_button.clicked.connect(self.decrypt)
 
+        #Menubar File
+        exitApplication = self.actionExit
+        exitApplication.triggered.connect(self.close)
+
         # Menubar Settings
         ChangeCharset = self.actionChangeCharset
         ChangeCharset.triggered.connect(self.open_CharsetWindow)
@@ -45,6 +51,10 @@ class MainWindow(QMainWindow):
             "Encrypt": 2,
             "Decrypt": 3
         }
+
+    def closeEvent(self, event):
+        if self.dialog:
+            self.dialog.close()
 
     def init_ui(self, ui_name):
         full_path = resource_path(ui_name)
