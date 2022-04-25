@@ -95,26 +95,26 @@
 \newpage
 
 %\thispagestyle{empty}
-\thispagestyle{plain}
-\cleardoublepage
-\addcontentsline{toc}{section}{\listfigurename}
-\listoffigures
+%\thispagestyle{plain}
+%\cleardoublepage
+%\addcontentsline{toc}{section}{\listfigurename}
+%\listoffigures
 
-\addcontentsline{toc}{section}{\listtablename}
-\listoftables
+%\addcontentsline{toc}{section}{\listtablename}
+%\listoftables
 
-\addcontentsline{toc}{section}{Listings}
-\lstlistoflistings
+%\addcontentsline{toc}{section}{Listings}
+%\lstlistoflistings
 
-\newpage
+%\newpage
 
 %\thispagestyle{empty}
-\thispagestyle{plain}
-\cleardoublepage
-\section*{Abkürzungsverzeichnis}
-\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+%\thispagestyle{plain}
+%\cleardoublepage
+%\section*{Abkürzungsverzeichnis}
+%\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 
-\newpage
+%\newpage
 \pagenumbering{arabic}
 
 %% Kopf und Fusszeilen==================================================== 
@@ -149,6 +149,8 @@ In dieser Arbeit soll ein Simulationsprogramm geschrieben werden, mit dem mehrer
 \subsection{Repository}
 Der Quellcode kann in folgendem GitHub-Repository abgerufen werden:\\ \url{https://github.com/NicoSchrodt/EncryptionService}
 
+\subsection{Commit-Historie}
+Der Titel jedes Kapitels hat eine Fußnote die den Commit angibt während dem das Kapitel geschrieben wurde bzw. dieses zuletzt verändert wurde. Für Abschnitte in denen auf spezifische Änderungen eingegangen wird, werden i.d.R eigene Commits angegeben mit direktem Link (100\% RickRoll-Frei, für paranoide ist der Commit auch seperat angegeben).
 \newpage
 
 \section{Clean Architecture}
@@ -261,15 +263,26 @@ Die Aufgabe von Unit Tests ist es einen jeweils möglichst kleinen Teil eines Sy
 \subsection{Verwendete Unit Tests und getesteter Code}
 Um den Umfang der Tests möglichst überschaubar zu halten wurden lediglich die Funktionen der Logik-Schicht getestet. Insbesondere die Verschlüsselung, aber auch die darin relevanten Charset- und Interface Klassen erhielten UnitTests.
 \begin{center}
-	\includegraphics[width=8cm]{bilder/Tests.png}
+	\includegraphics[width=10cm]{bilder/Tests.png}
 \end{center}
 
 \subsubsection{Mocks}
-Platzhalter
-
-\subsubsection{Code Coverage}
-Platzhalter
-
+Für einige UnitTests ist es nicht möglich die einzelne Komponente abgekoppelt vom Rest zu testen. Um trotz dieser Abhängigkeiten zu anderen Klassen, Methoden, etc. die Funktionalität mit einem UnitTest sicherzustellen, werden Mocks eingesetzt. Deren Aufgabe ist es die benötigten Abhängigkeiten zu imitieren und die benötigten Schnittstellen zur Verfügung zu stellen. In diesem Projekt wurden Mocks auf zwei verschiedene Arten eingesetzt. In der unteren Abbildung ist die herkömmliche Art zu sehen.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/Mocks1.png}
+\end{center}
+Spezifisch für Python wird die 'create\_autospec' Funktion auf die benötigte Klasse angewendet um ein Mock-Objekt zu erzeugen, welches die Eigenschaften der Klasse annimmt. Daraufhin wird für den Mock festgelegt was die später aufgerufenen Funktionen für einen Rückgabewert haben sollen. Zum Schluss wird der Mock im Test verwendet an der Stelle an der normalerweise die Ursprungsklasse verwendet werden sollte.\\
+Die zweite Art wie Mocks in den UnitTests in diesem Projekt verwendet werden ist in nächsten Abbildung zu sehen.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/Mocks2.png}
+\end{center}
+Das Erzeugen und 'trainieren' des Mocks ist gleich wie im oberen Beispiel. Der Unterschied ist hierbei wie der Mock verwendet wird. Statt einen benötigten Mock für jeden Test individuell neu zu erzeugen und zu trainieren um ihn am Ende wieder zu verwerfen, kann man Tests mit ähnlichen Startbedingungen auch bündeln. Benötigen mehrere Tests die selben Mockobjekte, so bietet es sich an die 'setUp'-Methode zu verwenden. In einem Testbündel wird dadurch für jeden Test, vor der Ausführung dessen, diese Funktion einmal ausgeführt. Dadurch erhält man für jeden Test die selben Mocks, man spart sich aber Codeduplikate, also weniger potentielle Fehler und eine verbesserte Übersichtlichkeit. 
+\subsubsection[Code Coverage]{Code Coverage\protect\footnote{Commit: 759310aada67666e973e748275b2739f1c93ace5}}
+Code Coverage beschreibt, welchen Anteil der Codezeilen im gesamten Projekt von Tests durchlaufen werden. Die Aufgabe dieses Wertes ist es einen groben Überblick darüber zu geben, wie viel des Gessamtprojekts resistent gegenüber zukünftigen fehlerhaften Änderungen ist. Wichtig ist dabei aber nicht nur der absolute Prozentsatz sondern auch die Abdeckung der verschiedenen Branches einer Klasse, da nicht jede Stelle im Code gleich wichtig ist bzw. gleich oft aufgerufen wird. Mit den für dieses Projekt geschriebenen UnitTests wurde ein Coverage Report erzeugt, welcher in der unteren Abbildung zu sehen ist (Gefiltert nach eigenen Klassen).
+\begin{center}
+	\includegraphics[width=12cm]{bilder/Coverage.png}
+\end{center}
+Wie zu erkennen ist werden nur die für die Logik verantwortlichen Klassen in der Coverage berücksichtigt. Weiterhin werden einige Zeilen vollständig in der Coverage verworfen. Dazu zählt beispielsweise auch die Klasse die für die Tests verantwortlich ist oder das EncrypterInterface in dem einige Zeilen lediglich eine 'NotImplemented'-Exception auslösen.
 \subsection{Anwendung der ATRIP-Regeln}
 Platzhalter
 
