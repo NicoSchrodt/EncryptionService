@@ -51,5 +51,9 @@ def find_key_length(cyphertext, seq_len, max_key_len):
     # get common factors by descending frequency,
     # which constitute candidate key lengths
     ckl = _candidate_key_lengths(factor_lists=factor_lists, max_key_len=max_key_len)
-    key_len = ckl[0]
-    return key_len
+
+    if len(ckl) == 0:
+        return "Undetermined length"
+    #key_len = ckl[0]
+    #return key_len
+    return ckl
