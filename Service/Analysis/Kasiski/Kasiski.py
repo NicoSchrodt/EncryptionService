@@ -51,7 +51,7 @@ class Kasiski:
         ckl = self._candidate_key_lengths(factor_lists=factor_lists, max_key_len=max_key_len)
 
         if len(ckl) == 0:
-            return "Undetermined length"
+            raise ValueError
         # key_len = ckl[0]
         # return key_len
         return ckl

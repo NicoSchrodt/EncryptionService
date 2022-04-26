@@ -26,7 +26,12 @@ class KasiskiTestWindow(QMainWindow):
         self.CipherTest_TE.setPlainText(self.MainWindow.cipher_TE.toPlainText())
 
     def determine_key_length(self):
-        self.KeyLengths_TE.setPlainText(str(guessKey(self.CipherTest_TE.toPlainText())))
+        try:
+            self.KeyLengths_TE.setPlainText(str(guessKey(self.CipherTest_TE.toPlainText())))
+        except ValueError:
+            self.KeyLengths_TE.setPlainText("Unable to determine Length of Key from given Text")
+        except:
+            self.KeyLengths_TE.setPlainText("An Error occurred. Please try again with a different Text.")
 
     def cache_results(self):
         pass
