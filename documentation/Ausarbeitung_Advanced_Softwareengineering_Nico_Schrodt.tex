@@ -151,6 +151,8 @@ Der Quellcode kann in folgendem GitHub-Repository abgerufen werden:\\ \url{https
 
 \subsection{Commit-Historie}
 Der Titel jedes Kapitels hat eine Fußnote die den Commit angibt während dem das Kapitel geschrieben wurde bzw. dieses zuletzt verändert wurde. Für Abschnitte in denen auf spezifische Änderungen eingegangen wird, werden i.d.R eigene Commits angegeben mit direktem Link (100\% RickRoll-Frei, für paranoide ist der Commit auch seperat angegeben).
+
+\noindent{\Huge Sollte dieser Satz noch hier sein: Dies ist eine Vorabversion als Notfalls falls ich vergessen habe die fertige Version rechtzeitig hochzuladen.\par}
 \newpage
 
 \section{Clean Architecture}
@@ -237,7 +239,9 @@ Dieses Beispiel für einen 'Duplicated Code'- Code Smells ist in der 'Caesar-Enc
 \end{center}
 
 \subsubsection{Code Smells 2 Long Method}
-Platzhalter
+\begin{center}
+	\includegraphics[width=15cm]{bilder/CodeSmells2.png}
+\end{center}
 
 \subsubsection{Code Smells 3 Large Class}
 Der dritte Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große Klasse die unter anderem zu viele Instanzvariablen, Methoden oder allgemein Codezeilen aufweist. Als Beispiel dafür ist in der unteren Abbildung die MainWindow-Klasse zu sehen.
@@ -247,14 +251,18 @@ Der dritte Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große K
 Mit ~130 Zeilen Code und 10 verschiedenen Funktionen ist der Umfang der Klasse etwas zu groß. Abhilfe könnte geschaffen werden indem man beispielsweise einige Funktionen die die Handhabung der Verschlüsselung übernehmen in eine neue View-Klasse auslagert o.Ä.
 
 \subsection{Angewendete Refactorings}
+Die beiden durchgeführten Refactorings beziehen sich auf andere Beispiele als oben besprochen.
+
+\subsubsection[Refactoring 1 Extract Method]{Refactoring 1 Extract Method\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/5eb9481d0b440b72332d2c3ed4208e68343f3ac4}{5eb9481d0b440b72332d2c3ed4208e68343f3ac4}}}
 Platzhalter
 
-\subsubsection{Refactoring 1}
-Platzhalter
-
-\subsubsection{Refactoring 2}
-Platzhalter
-
+\subsubsection[Refactoring 2 Replace Error Code with Exception]{Refactoring 2 Replace Error Code with Exception\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/e7bfbe622070be07df80dcd3635307d828a1e895}{e7bfbe622070be07df80dcd3635307d828a1e895}}}
+Die Aufgabe dieses Refactorings ist es potentielle Fehler zu vermeiden die beim Fehlinterpretieren von Rückgabewerten o.Ä. auftreten können. Ziel ist es, dass ein Fehlerstatus explizit eine Exception auslöst. Dieses Refactoring wurde im Code für das Kasiski-Verfahren angewendet, dass je nach Länge des Textes keine Schlüssellänge ermitteln kann.
+\begin{center}
+	\includegraphics[width=15cm]{bilder/Refactoring2_b.png}
+	\includegraphics[width=15cm]{bilder/Refactoring2_a.png}
+\end{center}
+Für den Fall das die Funktion '\_candidate\_key\_lengths' eine leere Liste zurückgibt, wird statt einer Fehlermeldung ein ValueError ausgelöst. Dieser wird in der aufrufenden Funktion der Benutzeroberfläche abgefangen und entsprechend verarbeitet.
 \newpage
 
 \section{Unit Tests}
