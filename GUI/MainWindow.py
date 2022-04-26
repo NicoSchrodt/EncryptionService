@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QMainWindow
 from PyQt6.uic import loadUi
 
 from GUI.CharsetWindow import CharsetWindow
+from GUI.KasiskiTestWindow import KasiskiTestWindow
 
 from Service.Encryption.CaesarEncrypter import CaesarEncrypter
 from Service.Encryption.VigenereEncrypter import VigenereEncrypter
@@ -37,13 +38,16 @@ class MainWindow(QMainWindow):
         decrypt_button = self.button_decrypt
         decrypt_button.clicked.connect(self.decrypt)
 
-        #Menubar File
+        # Menubar File
         exitApplication = self.actionExit
         exitApplication.triggered.connect(self.close)
 
         # Menubar Settings
         ChangeCharset = self.actionChangeCharset
         ChangeCharset.triggered.connect(self.open_CharsetWindow)
+
+        # Menubar Analysis
+        self.actionKeyLength.triggered.connect(self.open_KasiskiTestWindow)
 
         self.encryption_dict = {
             "Vigenère": 0,
@@ -61,7 +65,15 @@ class MainWindow(QMainWindow):
         loadUi(full_path, self)
 
     def open_CharsetWindow(self):
+        if self.dialog is not None:
+            self.dialog.close()
         self.dialog = CharsetWindow(self)
+        self.dialog.show()
+
+    def open_KasiskiTestWindow(self):
+        if self.dialog is not None:
+            self.dialog.close()
+        self.dialog = KasiskiTestWindow(self)
         self.dialog.show()
 
     def set_Text(self, dict_value):
