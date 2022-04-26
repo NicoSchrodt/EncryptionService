@@ -40,7 +40,11 @@
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QPlainTextEdit" name="KeyLengths_TE"/>
+     <widget class="QPlainTextEdit" name="KeyLengths_TE">
+      <property name="textInteractionFlags">
+       <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

@@ -4,7 +4,7 @@ from math import sqrt
 def _repeated_seq_pos(text, seq_len):
     seq_pos = {}  # entries of sequence : [positions]
     for i, char in enumerate(text):
-        next_seq = text[i:i+seq_len]
+        next_seq = text[i:i + seq_len]
         if next_seq in seq_pos.keys():
             seq_pos[next_seq].append(i)
         else:
@@ -15,22 +15,22 @@ def _repeated_seq_pos(text, seq_len):
 
 
 def _get_spacings(positions):
-    return [positions[i+1] - positions[i] for i in range(len(positions)-1)]
+    return [positions[i + 1] - positions[i] for i in range(len(positions) - 1)]
 
 
 def _get_factors(number):
     factors = set()
-    for i in range(1, int(sqrt(number))+1):
+    for i in range(1, int(sqrt(number)) + 1):
         if number % i == 0:
             factors.add(i)
-            factors.add(number//i)
+            factors.add(number // i)
     return sorted(factors)
 
 
 def _candidate_key_lengths(factor_lists, max_key_len):
     all_factors = [factor_lists[lst][fac] for lst in range(len(factor_lists)) for fac in range(len(factor_lists[lst]))]
     # exclude factors larger than suspected max key length
-    candidate_lengths = list(filter(lambda x:  x <= max_key_len, all_factors))
+    candidate_lengths = list(filter(lambda x: x <= max_key_len, all_factors))
     # sort by probability (descending)
     sorted_candidates = sorted(set(candidate_lengths), key=lambda x: all_factors.count(x), reverse=True)
     return sorted_candidates
@@ -54,6 +54,8 @@ def find_key_length(cyphertext, seq_len, max_key_len):
 
     if len(ckl) == 0:
         return "Undetermined length"
-    #key_len = ckl[0]
-    #return key_len
+    # key_len = ckl[0]
+    # return key_len
     return ckl
+
+# The Code (with minor changes) from this file comes from https://github.com/ichantzaras/creamcrackerz
