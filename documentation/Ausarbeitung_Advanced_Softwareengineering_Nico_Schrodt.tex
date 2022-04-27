@@ -198,10 +198,17 @@ Als Beispiel dafür wird in der unteren Abbildung eine konkrete Implementierung 
 Die Klasse hat effektiv eine Aufgabe. Sie erhält bei Instanziierung ein Textobjekt. Auf diesem Textobjekt werden Verschlüsselungen durchgeführt, dabei wird lediglich zwischen Ver- und Entschlüsseln unterscheiden.
 
 \subsubsection{Open/Closed Principle}
-Das Open/Closed Principle beschreibt das Designziel Klassen, Funktionen, etc. so aufzubauen das sie offen sind für Erweiterungen und geschlossen für Veränderungen. Konkret heißt das, neue Anforderungen sollen eher durch z.B. Vererbung realisiert werden, statt konkreten Modifikationen in der relevanten Klasse.
-
+Das Open/Closed Principle beschreibt das Designziel Klassen, Funktionen, etc. so aufzubauen das sie offen sind für Erweiterungen und geschlossen für Veränderungen. Konkret heißt das, neue Anforderungen sollen eher durch z.B. Vererbung realisiert werden, statt konkreten Modifikationen in der relevanten Klasse. Dieses Prinzip wurde für das Projekt beispielsweise durch Vererbung realisiert. Statt einer generellen Encrypter-Klasse wird ein Interface verwendet, welches für jede verschiedene Anwendung eine davon erbende Klasse hat.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/OCP.png}
+\end{center}
+Dadurch ist es möglich weitere Verschlüsselungen hinzuzufügen ohne das Interface oder die erbenden Klassen zu modifizieren.
 \subsubsection{Liskov Substitution Principle}
 Das Liskov Substitution Principle vermittelt das Prinzip, das jede Spezialisierung, z.B. durch Polymorphie bei Vererbung, an jeder Stelle verwendet werden können muss an der auch die Generalisierung verwendet wird. Beispielsweise soll also die Funktion einer Erbenden Klasse nicht zu einem Fehler führen an einer Stelle an der die Funktion der Ursprungsklasse funktioniert hat.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/LSP.png}
+\end{center}
+Die Struktur an der dieses Prinzip Anwendung findet wäre in diesem Projekt die Text-Klasse sowie den Kindern dieser. Generell haben diese die selben Funktionen und können auch anstelle der Textklasse verwendet werden. Die Unterschiede liegen lediglich in der Instanziierung der Unterklassen, welche bspw. das Charset verändern.
 
 \subsubsection{Interface Segregation Principle}
 Mit dem Interface Segregation Principle soll verhindert werden, dass Klassen ein über-spezifiziertes Interface verwenden. Ein verwendetes Interface soll also möglichst schlank sein und nicht zu viele Funktionen auf einmal anbieten. Damit soll verhindert werden, dass Klassen Zugriff auf Funktionen haben die sie gar nicht verwenden.
@@ -212,10 +219,13 @@ Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplu
 \subsection{GRASP}
 
 \subsubsection{Low Coupling}
-'Low Coupling' oder 'Niedrige Kopplung' meint das Prinzip, dass Programmcode besser ist je weniger Abhängigkeiten auf die Umgebung bestehen bzw. diese möglichst nah beieinander sind.
+'Low Coupling' oder 'Niedrige Kopplung' meint das Prinzip, dass Programmcode besser ist je weniger Abhängigkeiten auf die Umgebung bestehen bzw. diese möglichst nah beieinander sind. Das soll eine flexiblere Anwendung ermöglichen und Modifikationen erleichtern, da die Anzahl an Abhängigkeiten überschaubarer ist.
 
 \subsubsection{High Cohesion}
-Platzhalter
+'High Cohesion' oder ein hohes Maß an Kohäsion stellt das Gegenstück zur niedrigen Kopplung dar. Hierbei soll sichergestellt werden, dass 'naher' Code tatsächlich eng miteinander Arbeitet. Das kann sich z.B. darin widerspiegeln ob Code ein Klasse regelmäßig verwendet wird oder nur in Spezialfällen. Prinzipiell ist ein Weg dieses Ziel zu erreichen das Aufspalten von großen Klassen in Subklassen mit kleineren und spezifischeren Aufgaben. Im Projekt wird dies erreicht durch implementieren einzelner Klassen für jede Verschlüsselung statt einer großen 'Encrypter'-Klasse.
+\begin{center}
+	\includegraphics[width=10cm]{bilder/High_Cohesion.png}
+\end{center}
 
 \subsection{DRY}
 DRY steht für 'Don't repeat yourself'. Zentraler Angelpunkt dieses Prinzips ist das Vermeiden von Code Duplikaten, sowie das Strukturieren des Programmcodes in einer Weise das nur logisch verknüpfte Elemente sich gegenseitig beeinflussen. Oder in anderen Worten, jedes logische Konstrukt im Quellcode muss durch eine klare von anderen Aspekten getrennte Struktur repräsentiert werden. Dadurch lassen sich z.B. einige Code Smells verhindern wie "Duplicated Code" oder "Shotgun Surgery".\\
