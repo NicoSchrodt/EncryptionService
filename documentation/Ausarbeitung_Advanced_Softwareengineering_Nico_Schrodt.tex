@@ -43,6 +43,8 @@
 \usepackage{graphicx}
 \graphicspath{ bilder/}
 
+\usepackage{rotating}
+
 \newcommand{\Autor}{Nico Schrodt}
 
 \newcommand{\Bearbeitungszeitraum}{5 + 6 Semester}
@@ -141,23 +143,25 @@
 \automark{section}  % Inhalt von [\rightmark]{\leftmark} 
 
 \section{Einführung}
-Dieses Kapitel befasst sich vorwiegend mit relevanten Grundlagen der Arbeit. Unter anderem wird das Ziel spezifiziert, elementare Aspekte der Arbeitsweise eines Prozessors werden erläutert und die verschiedenen Werkzeuge mit denen das Ziel realisiert wird werden aufgeführt.
+Dieses Kapitel fast für die Arbeit wichtige Aspekte zusammen. Unter anderem wird das Ziel spezifiziert, sowie einige für die Dokumentation relevante Hinweise wie die zu den Kapiteln gehörigen Commits. Außerdem wird die Datengrundlage kurz dargestellt.
 
 \subsection{Ziel der Arbeit}
-In dieser Arbeit soll ein Simulationsprogramm geschrieben werden, mit dem mehrere unterschiedliche 8-Bit Prozessoren simuliert werden können. Dazu sollen die Grundlegenden Eigenschaften in kurzen Lernprogrammen erläutert werden. Ebenfalls soll es eine interaktive Einweisung geben wie der Simulator verwendet werden kann.
+Für diesen Programmentwurf soll zusammen mit der Ausarbeitung eine Verschlüsselungssoftware mit Benutzeroberfläche entwickelt werden. Dabei wird die Ver- und Entschlüsselung mit dem Caesar- und dem Vigenere-Chiffre angeboten. Der Zeichensatz soll editierbar sein und ein Verfahren zum ermitteln der Schlüssellänge soll verwendet werden können (Kasiski-Test).
 
 \subsection{Repository}
 Der Quellcode kann in folgendem GitHub-Repository abgerufen werden:\\ \url{https://github.com/NicoSchrodt/EncryptionService}
 
 \subsection{Commit-Historie}
-Der Titel jedes Kapitels hat eine Fußnote die den Commit angibt während dem das Kapitel geschrieben wurde bzw. dieses zuletzt verändert wurde. Für Abschnitte in denen auf spezifische Änderungen eingegangen wird, werden i.d.R eigene Commits angegeben mit direktem Link (100\% RickRoll-Frei, für paranoide ist der Commit auch seperat angegeben).
+Der Titel einiger Kapitel hat eine Fußnote die den Commit angibt während dem das Kapitel geschrieben wurde bzw. dieses zuletzt verändert wurde. Für Abschnitte in denen auf spezifische Änderungen eingegangen wird, werden i.d.R eigene Commits angegeben mit direktem Link (100\% RickRoll-Frei, für paranoide ist der Commit auch seperat angegeben).
 
-\noindent{\Huge Sollte dieser Satz noch hier sein: Dies ist eine Vorabversion als Notfalls falls ich vergessen habe die fertige Version rechtzeitig hochzuladen.\par}
-
+\begin{sidewaysfigure}
 \subsection{UML-Diagramm}
-\begin{center}
-	\includegraphics[width=15cm]{bilder/UML_Diagram_professionaly_edited.png}
-\end{center}
+	\centering
+	\begin{minipage}{\textwidth}
+      \includegraphics[width=\textwidth]{bilder/UML_Diagram_professionaly_edited.png}\\
+   	\end{minipage}
+	%\includegraphics[width=15cm]{bilder/UML_Diagram_professionaly_edited.png}
+\end{sidewaysfigure}
 \newpage
 
 \section{Clean Architecture}
@@ -167,18 +171,17 @@ Der Sinn einer Clean Architecture ist es das Programm in klar definierte Schicht
 Für dieses Projekt sind zwei Schichten vorgesehen. Einmal die Benutzeroberfläche (GUI) welche mit Qt implementiert wird und die Logik, welche unter anderem die Verschlüsselung vornimmt. Der Benutzer soll ausschließlich mit der von Qt generierten Oberfläche interagieren z.B. durch Textfelder oder Knöpfe, welche vorkonfigurierte Befehle ausführen.
 
 \subsection{Umsetzung}
-Platzhalter
-
-\subsubsection{Benutzeroberfläche}
-Platzhalter
-
-\subsubsection{Verschlüsselungsdienst}
-Platzhalter
+In der unteren Abbildung ist die genaue Trennung der Schichten im UML-Diagram für das Projekt zu erkennen.
+\begin{center}
+	\includegraphics[width=15cm]{bilder/UML_Diagram_professionaly_edited_Schichten.png}
+\end{center}
+Wie anhand der Abhängigkeiten zu erkennen ist, soll das 'MainWindow' in dem der Nutzer die Verschlüsselung vornimmt lediglich auf Encrypter-Klassen (bzw. die konkreten Implementierungen) und Text-Klassen zugreifen und das 'KasiskiTestWindow' auf die 'Kasiski'-Klasse. Diese Klassen sind, idealerweise die einzige Schnittstellen, welche Klassen der GUI-Schicht aus Klassen der Logik-Schicht verwenden. Klassen der Logik-Schicht verwenden unter keinen Umständen Ressourcen der GUI-Schicht.
 
 \newpage
 
-\section{Entwurfsmuster}
-Das für den Umfang dieses Programmentwurfs verwendete Entwurfsmuster ist der Dekorierer. Aufgabe des Dekorierers ist es eine Klasse oder Funktion um einen oder mehrere Aspekte zu erweitern ohne die Klasse selbst zu verändern. Das Entwurfsmuster wurde in der Klasse 'EncrypterInterface.py' angewendet.
+\section[Entwurfsmuster]{Entwurfsmuster\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/7a52dbcd402627e359ae89fa8c8b9a5c9f214dd6}{7a52dbcd402627e359ae89fa8c8b9a5c9f214dd6}}}
+\label{Entwurfsmuster}
+Das für den Umfang dieses Programmentwurfs verwendete Entwurfsmuster ist der Dekorierer. Aufgabe des Dekorierers ist es eine Klasse oder Funktion um einen oder mehrere Aspekte zu erweitern ohne die Klasse selbst zu verändern. Das Entwurfsmuster wurde in der Klasse 'EncrypterInterface' angewendet.
 \begin{center}
 	\includegraphics[width=10cm]{bilder/Decorator_before.png}
 \end{center}
@@ -186,7 +189,7 @@ Das für den Umfang dieses Programmentwurfs verwendete Entwurfsmuster ist der De
 \begin{center}
 	\includegraphics[width=10cm]{bilder/Decorator_after.png}
 \end{center}
-Die Funktion des Dekorierers beschränkt sich hier auf konkrete Implementierungen des EncrypterInterfaces, Also Klassen die von 'EncrypterInterface' erben. Das Interface selbst könnte potentiell immer noch instantiiert und verwendet werden ohne die Exception auszulösen.
+Die Funktion des Dekorierers beschränkt sich hier auf konkrete Implementierungen des EncrypterInterfaces, Also Klassen die von 'EncrypterInterface' erben. Das Interface selbst könnte potentiell immer noch instantiiert und verwendet werden ohne die Exception auszulösen. Das wiederum wird verhindert durch das Auslösen eines 'NotImplementedError'.
 
 \newpage
 
@@ -216,15 +219,16 @@ Das Liskov Substitution Principle vermittelt das Prinzip, das jede Spezialisieru
 Die Struktur an der dieses Prinzip Anwendung findet wäre in diesem Projekt die Text-Klasse sowie den Kindern dieser. Generell haben diese die selben Funktionen und können auch anstelle der Textklasse verwendet werden. Die Unterschiede liegen lediglich in der Instanziierung der Unterklassen, welche bspw. das Charset verändern.
 
 \subsubsection{Interface Segregation Principle}
-Mit dem Interface Segregation Principle soll verhindert werden, dass Klassen ein über-spezifiziertes Interface verwenden. Ein verwendetes Interface soll also möglichst schlank sein und nicht zu viele Funktionen auf einmal anbieten. Damit soll verhindert werden, dass Klassen Zugriff auf Funktionen haben die sie gar nicht verwenden.
+Mit dem Interface Segregation Principle soll verhindert werden, dass Klassen ein über-spezifiziertes Interface verwenden. Ein verwendetes Interface soll also möglichst schlank sein und nicht zu viele Funktionen auf einmal anbieten. Damit soll verhindert werden, dass Klassen Zugriff auf Funktionen haben die sie gar nicht verwenden.\\
+Dieses Projekt verwendet nur ein einziges Interface ('EncrypterInterface'), welches wiederum nur 3 verschiedene Funktionen besitzt mit einer definierten Instanzvariable (siehe Kapitel \ref{Entwurfsmuster}). Daher ist es wenig sinnvoll dieses weiter aufzuteilen, auch weil davon auszugehen ist, dass in den meisten Anwendungsfällen alle Methoden benötigt werden (Verschlüsselung/Entschlüsselung/Schlüssel-Validierung).
 
 \subsubsection{Dependency Inversion Principle}
-Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplung. Klassen auf einer höheren Ebene bspw. der Logik eines Programms solle nicht von niedrigeren Klassen z.B. Benutzerinterfaces abhängen. Dies wird unter anderem durch Verschieben der Abhängigkeit erreicht, bspw. auf ein Interface und dem Übergeben von Referenzen auf konkrete Instanzen.
+Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplung. Klassen auf einer höheren Ebene bspw. der Logik eines Programms solle nicht von niedrigeren Klassen z.B. Benutzerinterfaces abhängen. Dies wird unter anderem durch Verschieben der Abhängigkeit erreicht, bspw. auf ein Interface und dem Übergeben von Referenzen auf konkrete Instanzen. Dieses Prinzip wird für die Text-Klasse und die konkreten Implementierungen des EncrypterInterfaces über Depenency Injection angewendet. Bei Instanziierung eines z.B. CaesarEncrypter-Objekts wird ein CaesarText-Objekt übergeben statt dieses intern zu erzeugen.
 
 \subsection{GRASP}
 
 \subsubsection{Low Coupling}
-'Low Coupling' oder 'Niedrige Kopplung' meint das Prinzip, dass Programmcode besser ist je weniger Abhängigkeiten auf die Umgebung bestehen bzw. diese möglichst nah beieinander sind. Das soll eine flexiblere Anwendung ermöglichen und Modifikationen erleichtern, da die Anzahl an Abhängigkeiten überschaubarer ist.
+'Low Coupling' oder 'Niedrige Kopplung' meint das Prinzip, dass Programmcode besser ist je weniger Abhängigkeiten auf die Umgebung bestehen bzw. diese möglichst nah beieinander sind. Das soll eine flexiblere Anwendung ermöglichen und Modifikationen erleichtern, da die Anzahl an Abhängigkeiten überschaubarer ist. Generell wurde versuchst dieses Prinzip für das gesamte Projekt so weit wie möglich Anzuwenden unter anderem durch Einhalten einiger Elemente der SOLID-Prinzipien, wie zum Beispiel des Single Responsibility Prinzips oder des Dependency Inversion Prinzips.
 
 \subsubsection{High Cohesion}
 'High Cohesion' oder ein hohes Maß an Kohäsion stellt das Gegenstück zur niedrigen Kopplung dar. Hierbei soll sichergestellt werden, dass 'naher' Code tatsächlich eng miteinander Arbeitet. Das kann sich z.B. darin widerspiegeln ob Code ein Klasse regelmäßig verwendet wird oder nur in Spezialfällen. Prinzipiell ist ein Weg dieses Ziel zu erreichen das Aufspalten von großen Klassen in Subklassen mit kleineren und spezifischeren Aufgaben. Im Projekt wird dies erreicht durch implementieren einzelner Klassen für jede Verschlüsselung statt einer großen 'Encrypter'-Klasse.
@@ -233,7 +237,7 @@ Das Dependency Inversion Principle beschreibt effektiv das Prinzip der Entkopplu
 \end{center}
 
 \subsection{DRY}
-DRY steht für 'Don't repeat yourself'. Zentraler Angelpunkt dieses Prinzips ist das Vermeiden von Code Duplikaten, sowie das Strukturieren des Programmcodes in einer Weise das nur logisch verknüpfte Elemente sich gegenseitig beeinflussen. Oder in anderen Worten, jedes logische Konstrukt im Quellcode muss durch eine klare von anderen Aspekten getrennte Struktur repräsentiert werden. Dadurch lassen sich z.B. einige Code Smells verhindern wie "Duplicated Code" oder "Shotgun Surgery".\\
+DRY steht für 'Don't repeat yourself'. Zentraler Angelpunkt dieses Prinzips ist das Vermeiden von Code Duplikaten, sowie das Strukturieren des Programmcodes in einer Weise das nur logisch verknüpfte Elemente sich gegenseitig beeinflussen. Oder in anderen Worten, jedes logische Konstrukt im Quellcode muss durch eine klare von anderen Aspekten getrennte Struktur repräsentiert werden. Dadurch lassen sich z.B. einige Code Smells verhindern wie 'Duplicated Code' oder 'Shotgun Surgery'.\\
 Das Prinzip wurde angewendet hinsichtlich dem vermeiden von Code Duplikaten, welche sich unter anderem in zahlreichen Klassen die für die Verschlüsselung zuständig sind befanden, da der Prozess der Ver- und Entschlüsselung je nach Verfahren recht ähnlich ist (bspw. Vigenère- oder Caesar-Chiffre).
 
 \newpage
@@ -244,7 +248,7 @@ Das Ziel von Refactoring ist das Verbessern der Codequalität. Für diese Arbeit
 \subsection{Code Smells}
 Unter 'Code Smells' versteht man Stellen im Programmcode, welche Verbesserungspotential aufweisen bspw. bezüglich der Übersichtlichkeit.\\ (\textbf{Anmerkung: }Die hier aufgelisteten Code Smells sind womöglich nicht mehr in der neuesten Version des Projekts zu finden, sondern nur noch in älteren Commits)
 
-\subsubsection{Code Smells 1 Duplicated Code}
+\subsubsection[Code Smells 1 Duplicated Code]{Code Smells 1 Duplicated Code\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/7f172c18e8f0a70c8a11477fac25fce0d838ed86}{7f172c18e8f0a70c8a11477fac25fce0d838ed86}}}
 Dieses Beispiel für einen 'Duplicated Code'- Code Smells ist in der 'Caesar-Encrypter.py'- Datei zu finden. Ausschlaggebend ist hierbei, dass das Verfahren zum Ver- und Entschlüsseln effektiv gleich ist mit der Ausnahme, welcher der Starttext ist und in welche Richtung (Positiv/Negativ) der Schlüssel anzuwenden ist.
 \begin{center}
 	\includegraphics[width=15cm]{bilder/CodeSmells1_a.png}
@@ -253,23 +257,24 @@ Dieses Beispiel für einen 'Duplicated Code'- Code Smells ist in der 'Caesar-Enc
 	\includegraphics[width=15cm]{bilder/CodeSmells1_b.png}
 \end{center}
 
-\subsubsection{Code Smells 2 Long Method}
-\begin{center}
-	\includegraphics[width=15cm]{bilder/CodeSmells2.png}
-\end{center}
-
-\subsubsection{Code Smells 3 Large Class}
-Der dritte Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große Klasse die unter anderem zu viele Instanzvariablen, Methoden oder allgemein Codezeilen aufweist. Als Beispiel dafür ist in der unteren Abbildung die MainWindow-Klasse zu sehen.
+\subsubsection{Code Smells 2 Large Class}
+Der zweite Code Smells zeigt eine 'Large Class'. Dieser bezeichnet eine große Klasse die unter anderem zu viele Instanzvariablen, Methoden oder allgemein Codezeilen aufweist. Als Beispiel dafür ist in der unteren Abbildung die MainWindow-Klasse zu sehen.
 \begin{center}
 	\includegraphics[width=5cm]{bilder/CodeSmells3.png}
 \end{center}
 Mit ~130 Zeilen Code und 10 verschiedenen Funktionen ist der Umfang der Klasse etwas zu groß. Abhilfe könnte geschaffen werden indem man beispielsweise einige Funktionen die die Handhabung der Verschlüsselung übernehmen in eine neue View-Klasse auslagert o.Ä.
 
-\subsection{Angewendete Refactorings}
-Die beiden durchgeführten Refactorings beziehen sich auf andere Beispiele als oben besprochen.
+\subsubsection[Code Smells 3 Long Method]{Code Smells 3 Long Method\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/5386c6481b981c620df1d7a1570e74a0f0ee154a}{5386c6481b981c620df1d7a1570e74a0f0ee154a}}}
+Eine Long Method ist ähnlich wie eine Large Class. Hier ist der Umfang der Funktion entweder zu groß dimensioniert worden oder die einzelnen Teilaufgaben der Funktion hätten in kleinere Teilaufgaben ausgelagert werden können z.B. über ein Extract Method Refactoring. Im unteren Beispiel sieht man die Instanz-Methode des MainWindows. Diese lässt sich grob in drei Abschnitte unterteilen. Zu Beginn werden Variablen gesetzt die für andere Methoden wichtig sind und es werden Flags gesetzt die das Verhalten des Fensters beeinflussen. Danach werden den Knöpfen im Fenster die verschiedenen Funktionen zugeweisen und zuletzt wird ein Dictionary mit einer Variable verknüpft für späteren Verbrauch.
+\begin{center}
+	\includegraphics[width=15cm]{bilder/CodeSmells2.png}
+\end{center}
 
-\subsubsection[Refactoring 1 Extract Method]{Refactoring 1 Extract Method\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/5eb9481d0b440b72332d2c3ed4208e68343f3ac4}{5eb9481d0b440b72332d2c3ed4208e68343f3ac4}}}
-Platzhalter
+\subsection{Angewendete Refactorings}
+Die beiden durchgeführten Refactorings beziehen sich auf andere Beispiele als die oben besprochenen Code Smells.
+
+\subsubsection[Refactoring 1 Extract Method]{Refactoring 1 Extract Method\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/52902fbc0bd881dd38210d51e4f84c04449fd3fe}{52902fbc0bd881dd38210d51e4f84c04449fd3fe}}}
+Mit diesem Refactoring sollen lange Codeabschnitte ausgelagert werden und durch Methodenaufrufe ersetzt werden, welche die Funktion dieser beschreiben. Dadurch wird der Code feingranularer und idealerweise verständlicher. Angewendet wurde dieses Refactoring in der MainWindow Klasse für die beiden Funktionen, welche für das Ver- bzw. Entschlüssen verantwortlich sind. Statt in einer Funktion das Textobjekt, das Verschlüsselungsobjekt und den Zeichensatz festzulegen, sowie die Verschlüsselung auch noch durchzuführen und in der Benutzeroberfläche anzuzeigen, wurden diese Aufgaben auf mehrere Funktionen verteilt. Als Nebeneffekt davon war es auch einfacher einen Zeichensatz entgegenzunehmen der über das CharsetWindow festgelegt wurde.
 
 \subsubsection[Refactoring 2 Replace Error Code with Exception]{Refactoring 2 Replace Error Code with Exception\protect\footnote{Commit: \href{https://github.com/NicoSchrodt/EncryptionService/commit/e7bfbe622070be07df80dcd3635307d828a1e895}{e7bfbe622070be07df80dcd3635307d828a1e895}}}
 Die Aufgabe dieses Refactorings ist es potentielle Fehler zu vermeiden die beim Fehlinterpretieren von Rückgabewerten o.Ä. auftreten können. Ziel ist es, dass ein Fehlerstatus explizit eine Exception auslöst. Dieses Refactoring wurde im Code für das Kasiski-Verfahren angewendet, dass je nach Länge des Textes keine Schlüssellänge ermitteln kann.
@@ -290,6 +295,7 @@ Um den Umfang der Tests möglichst überschaubar zu halten wurden lediglich die 
 \end{center}
 
 \subsubsection{Mocks}
+\label{Mocks}
 Für einige UnitTests ist es nicht möglich die einzelne Komponente abgekoppelt vom Rest zu testen. Um trotz dieser Abhängigkeiten zu anderen Klassen, Methoden, etc. die Funktionalität mit einem UnitTest sicherzustellen, werden Mocks eingesetzt. Deren Aufgabe ist es die benötigten Abhängigkeiten zu imitieren und die benötigten Schnittstellen zur Verfügung zu stellen. In diesem Projekt wurden Mocks auf zwei verschiedene Arten eingesetzt. In der unteren Abbildung ist die herkömmliche Art zu sehen.
 \begin{center}
 	\includegraphics[width=10cm]{bilder/Mocks1.png}
@@ -307,8 +313,30 @@ Code Coverage beschreibt, welchen Anteil der Codezeilen im gesamten Projekt von 
 \end{center}
 Wie zu erkennen ist werden nur die für die Logik verantwortlichen Klassen in der Coverage berücksichtigt. Weiterhin werden einige Zeilen vollständig in der Coverage verworfen. Dazu zählt beispielsweise auch die Klasse die für die Tests verantwortlich ist oder das EncrypterInterface in dem einige Zeilen lediglich eine 'NotImplemented'-Exception auslösen.
 \subsection{Anwendung der ATRIP-Regeln}
-Platzhalter
+Die ATRIP-Regeln sind Eigentschaften die UnitTests erfüllen sollten um einen Standard einzuhalten der gute UnitTests auszeichnet.
+\subsubsection{Automatic}
+Unit Tests müssen automatisch ablaufen um effektiv zu sein. Manuelle Werteingaben für jeden Testversuch oder ein manuelles verifizieren der Ergebnisse sind in den meisten Fällen die Zeit nicht wert und müssen automatisch geschehen. Über die verwendete IDE ist es sogar möglich Tests für jede Änderung im Programm automatisch im Hintergrund laufen zu lassen.
+\begin{center}
+	\includegraphics[width=5cm]{bilder/Automatic.png}
+\end{center}
+\subsubsection{Thorough}
+Gute Tests decken außerdem alle wichtigen Fälle ab die für eine zu testende Funktion möglicherweise auftreten können. Dazu zählt unter anderem auch eine ausführliche Branch-Coverage. Die se Abdeckung war unter anderem für die verschiedenen Verschlüsselungen notwendig, da einige Sonderfälle auftreten können, wie in der unteren Abbildung zu sehen ist.
+\begin{center}
+	\includegraphics[width=9cm]{bilder/Thorough.png}
+\end{center}
 
+\subsubsection{Repeatable}
+Es ist auch wichtig das UnitTests 100 Prozent wiederholbar sind. Gemeint ist damit, das in einem UnitTest keine zufälligen oder inkonsistenten Variablen eine Rolle spielen dürfen wie zum Beispiel eine Random-Funktion oder das Abfragen eines Datums über die Systemzeit. Ein weiteres Negativbeispiel dafür was auch in diesem Projekt möglich gewesen wäre, ist das Testen der Benutzeroberfläche und Inputs von dieser die  direkt vom Nutzer stammen statt Mocks zu verwenden.
+
+\subsubsection{Independant}
+Tests dürfen weiterhin auch nicht voneinander abhängig sein. Jeder Test muss in jeder Reihenfolge ausführbar sein und darf die anderen nicht beeinflussen. Damit ist nicht nur gemeint, dass ein Test einen anderen Test aufruft oder ausführt, sondern auch das Tests die selben Aspekte oder Komponenten testen. Es sollte verhindert werden, dass ein neuer Bug in einer Komponente mehrere Tests dazu bringt fehl zuschlagen. Durch die verwendete Test-Bibliothek ('unittest') fällt es auch recht leicht dies zu garantieren, da Funktion wie 'setUp' (siehe \ref{Mocks}) automatisch vor ausführen des nächsten Tests alles zurücksetzen.
+
+\subsubsection{Professional}
+Und zuletzt müssen Tests die für ihre Implementierung in Anspruch genommene Zeit auch wert sein. Dazu zählt das sie erstens korrekt sind und zweitens wichtige Aspekte testen. Dabei ist es auch relevant, dass die Tests leicht verständlich sind um das erkennen von Fehlern zu vereinfachen. Als Beispiel dafür ist in der unteren Abbildung ein Test für die Verschlüsselung nach dem Vigenere-Verfahren abgebildet. Über die 'setUp'-Methode wird ein Mock erstellt als Stellvertreter für das Text-Objekt, welches anschließend befüllt wird. Im tatsächlichen Test werden erst klar ersichtlich Parameter festgelegt und das erwartete Ergebnis beschrieben. Daraufhin wird die Funktion ausgeführt und das Ergebnis überprüft.
+\begin{center}
+	\includegraphics[width=12cm]{bilder/Professional.png}
+	\label{Professional_pic}
+\end{center}
 
 %\newpage
 %\thispagestyle{empty}
